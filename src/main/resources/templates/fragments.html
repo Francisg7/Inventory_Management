@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security/">
+
+        <!--Main Navigation-->
+        <nav th:fragment="nav" class="navbar fixed-top navbar-expand-lg navbar-dark default-color-dark scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#"><strong>Sybre</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/office}">Offices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/employee}">Employees</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product}">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/customer}">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/sale}">Sales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/supplier}">Suppliers</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link"><i class="fas fa-user"></i> <span sec:authentication="name"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/logout}" type="submit" class="nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--Main Navigation-->
+        
+        
+        <!-- Central Modal Medium Info - DELETE EMPLOYEE -->
+        <div th:fragment="info-modal"  data-path="" data-redirect="" class="modal fade" id="centralModalInfoDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-notify modal-info" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <p class="heading lead">Modal Info</p>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body text-center">
+
+                        <img th:src="@{/img/info.png}" alt="info" class="img-fluid mb-3" style="width: 80px; height: 80px;">
+
+                        <div>
+                            <p class="modal-message"></p>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer justify-content-center">
+                        <a type="button" class="btn btn-info" id="centralModalInfoDeleteBtnYes"><i class="fas fa-check"></i> YES</a>
+                        <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal"><i class="fas fa-times"></i> NO</a>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Central Modal Medium Info - DELETE EMPLOYEE-->
+</html>

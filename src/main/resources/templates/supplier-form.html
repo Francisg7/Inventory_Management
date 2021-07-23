@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Supplier</strong></h5>
+            </div>
+
+
+            <div th:insert="fragments::info-modal"></div>
+
+            <!--Card content-->
+            <div class="card-body">
+                
+                <form th:action="@{/suppliers/add}" th:object="${supplier}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="companyName"><strong>Company Name</strong></label>
+                            <input type="text" th:field="*{companyName}" th:class="${#fields.hasErrors('companyName')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="phoneNumber"><strong>Phone Number</strong></label>
+                            <input type="text" th:field="*{phoneNumber}" th:class="${#fields.hasErrors('phoneNumber')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="address"><strong>Address</strong></label>
+                            <input type="text" th:field="*{address}" th:class="${#fields.hasErrors('address')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="city"><strong>City</strong></label>
+                            <input type="text" th:field="*{city}" th:class="${#fields.hasErrors('city')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <button class="btn btn-success" type="submit">Create</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+                

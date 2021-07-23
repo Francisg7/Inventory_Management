@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Group</strong></h5>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <form th:action="@{/groups/add}" th:object="${group}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="name">Group Name</label>
+                            <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label><strong>Permissions</strong></label>
+
+                            <!-- Default unchecked -->
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Create</th>
+                                        <th>Update</th>
+                                        <th>View</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Employee</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createEmployee" th:field="*{permissions}" value="PERMISSION_CREATE_EMPLOYEES">
+                                                <label class="custom-control-label" for="createEmployee"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateEmployee" th:field="*{permissions}" value="PERMISSION_UPDATE_EMPLOYEES">
+                                                <label class="custom-control-label" for="updateEmployee"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewEmployee" th:field="*{permissions}" value="PERMISSION_VIEW_EMPLOYEES" checked>
+                                                <label class="custom-control-label" for="viewEmployee"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteEmployee" th:field="*{permissions}" value="PERMISSION_DELETE_EMPLOYEES">
+                                                <label class="custom-control-label" for="deleteEmployee"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Products</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createProducts" th:field="*{permissions}" value="PERMISSION_CREATE_PRODUCTS" checked>
+                                                <label class="custom-control-label" for="createProducts"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateProducts" th:field="*{permissions}" value="PERMISSION_UPDATE_PRODUCTS">
+                                                <label class="custom-control-label" for="updateProducts"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewProducts" th:field="*{permissions}" value="PERMISSION_VIEW_PRODUCTS"checked>
+                                                <label class="custom-control-label" for="viewProducts"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteProducts" th:field="*{permissions}" value="PERMISSION_DELETE_PRODUCTS">
+                                                <label class="custom-control-label" for="deleteProducts"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Categories</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createCategories" th:field="*{permissions}" value="PERMISSION_CREATE_CATEGORIES" checked>
+                                                <label class="custom-control-label" for="createCategories"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateCategories" th:field="*{permissions}" value="PERMISSION_UPDATE_CATEGORIES">
+                                                <label class="custom-control-label" for="updateCategories"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewCategories" th:field="*{permissions}" value="PERMISSION_VIEW_CATEGORIES" checked>
+                                                <label class="custom-control-label" for="viewCategories"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteCategories" th:field="*{permissions}" value="PERMISSION_DELETE_CATEGORIES">
+                                                <label class="custom-control-label" for="deleteCategories"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Stores</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createStores" th:field="*{permissions}" value="PERMISSION_CREATE_STORES" checked>
+                                                <label class="custom-control-label" for="createStores"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateStores" th:field="*{permissions}" value="PERMISSION_UPDATE_STORES">
+                                                <label class="custom-control-label" for="updateStores"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewStores" th:field="*{permissions}" value="PERMISSION_VIEW_STORES" checked>
+                                                <label class="custom-control-label" for="viewStores"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteStores" th:field="*{permissions}" value="PERMISSION_DELETE_STORES">
+                                                <label class="custom-control-label" for="deleteStores"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Groups</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createGroups" th:field="*{permissions}" value="PERMISSION_CREATE_GROUPS">
+                                                <label class="custom-control-label" for="createGroups"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateGroups" th:field="*{permissions}" value="PERMISSION_UPDATE_GROUPS">
+                                                <label class="custom-control-label" for="updateGroups"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewGroups" th:field="*{permissions}" value="PERMISSION_VIEW_GROUPS">
+                                                <label class="custom-control-label" for="viewGroups"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteGroups" th:field="*{permissions}" value="PERMISSION_DELETE_GROUPS">
+                                                <label class="custom-control-label" for="deleteGroups"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Orders</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createOrders" th:field="*{permissions}" value="PERMISSION_CREATE_ORDERS">
+                                                <label class="custom-control-label" for="createOrders"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateOrders" th:field="*{permissions}" value="PERMISSION_UPDATE_ORDERS">
+                                                <label class="custom-control-label" for="updateOrders"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewOrders" th:field="*{permissions}" value="PERMISSION_VIEW_ORDERS" checked>
+                                                <label class="custom-control-label" for="viewOrders"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteOrders" th:field="*{permissions}" value="PERMISSION_DELETE_ORDERS">
+                                                <label class="custom-control-label" for="deleteOrders"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Suppliers</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createSuppliers" th:field="*{permissions}" value="PERMISSION_CREATE_SUPPLIERS" checked>
+                                                <label class="custom-control-label" for="createSuppliers"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateSuppliers" th:field="*{permissions}" value="PERMISSION_UPDATE_SUPPLIERS">
+                                                <label class="custom-control-label" for="updateSuppliers"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewSuppliers" th:field="*{permissions}" value="PERMISSION_VIEW_SUPPLIERS" checked>
+                                                <label class="custom-control-label" for="viewSuppliers"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteSuppliers" th:field="*{permissions}" value="PERMISSION_DELETE_SUPPLIERS">
+                                                <label class="custom-control-label" for="deleteSuppliers"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Logins</th>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="createLogins" th:field="*{permissions}" value="PERMISSION_CREATE_LOGINS">
+                                                <label class="custom-control-label" for="createLogins"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateLogins" th:field="*{permissions}" value="PERMISSION_UPDATE_LOGINS">
+                                                <label class="custom-control-label" for="updateLogins"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewLogins" th:field="*{permissions}" value="PERMISSION_VIEW_LOGINS">
+                                                <label class="custom-control-label" for="viewLogins"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="deleteLogins" th:field="*{permissions}" value="PERMISSION_DELETE_LOGINS">
+                                                <label class="custom-control-label" for="deleteLogins"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Settings</th>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="updateSettings" th:field="*{permissions}" value="PERMISSION_UPDATE_SETTINGS">
+                                                <label class="custom-control-label" for="updateSettings"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="viewSettings" th:field="*{permissions}" value="PERMISSION_VIEW_SETTINGS" checked>
+                                                <label class="custom-control-label" for="viewSettings"></label>
+                                            </div>
+                                        </td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+
+

@@ -1,0 +1,96 @@
+<!--
+                <form style="color: #757575;" th:action="@{${'/employee/' + action}}" th:object="${employee}" method="post">
+
+                    <div th:if="${action == 'update'}">
+                        <input type="hidden" th:field="*{id}" />
+                    </div> 
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" th:field="*{firstName}" th:class="${#fields.hasErrors('firstName')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" th:field="*{lastName}" th:class="${#fields.hasErrors('lastName')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" th:field="*{email}" th:class="${#fields.hasErrors('email')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" th:field="*{phoneNumber}" th:class="${#fields.hasErrors('phoneNumber')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="province">Province</label>
+                            <input type="text" th:field="*{province}" th:class="${#fields.hasErrors('province')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('province')}" th:errors="*{province}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="city">City</label>
+                            <input type="text" th:field="*{city}" th:class="${#fields.hasErrors('city')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="street">Street</label>
+                            <input type="text" th:field="*{street}" th:class="${#fields.hasErrors('street')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="jobId">Job</label>
+                            <select th:field="*{jobId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="job : ${employee.jobs}"
+                                    th:value="${job.id}" 
+                                    th:text="${job.jobTitle}">Job</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="officeId">Office</label>
+                            <select th:field="*{officeId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="office : ${employee.offices}"
+                                    th:value="${office.id}" 
+                                    th:text="${office.location.city}">Office</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br/><br/>
+
+                    <hr/>
+                    <input class="btn btn-success waves-button" type="submit" value="Add" />
+                </form>-->

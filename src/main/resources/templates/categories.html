@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Categories</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+
+
+            <div class="card-header">
+                <h5 class="heading"><strong>All Categories</strong></h5>
+            </div>
+
+
+
+            <div th:insert="fragments::info-modal"></div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <a th:href="@{/categories/add}" class="btn btn-primary mr-auto mb-4">
+                    <i class="fas fa-plus mr-2"></i>Add Category
+                </a>
+
+                <table id="dtBasicExample" class="table table-striped table-bordered dt" cellspacing="0" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th class="th-sm">#ID
+
+                            </th>
+                            <th class="th-sm">Name
+
+                            </th>
+                            <th class="th-sm">Status
+
+                            </th>
+                            <th class="th-sm">Action
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="category : ${categories}">
+                            <td th:text="${category.id}"></td>
+                            <td th:text="${category.name}"></td>
+                            <td th:text="${category.status}"></td>
+                            <td>
+                                <a th:href="@{${'/categories/details/' + category.id}}" class="btn btn-light-green btn-sm"><i class="fas fa-list mr-1"></i>Details</a>
+                                <a th:href="@{${'/categories/update/' + category.id}}" class="btn btn-light-blue btn-sm mx-2"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                <a th:href="@{${'/categories/delete/' + category.id}}" class="btn btn-light-blue btn-sm btn-delete" data-toggle="modal" data-target="#centralModalInfoDelete" data-redirect="/categories?deleted" data-message="Are you sure you want to delete this category?"><i class="fas fa-trash mr-1"></i>Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#ID
+                            </th>
+                            <th>Name
+                            </th>
+                            <th>Status
+                            </th>
+                            <th>Action
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html>
+

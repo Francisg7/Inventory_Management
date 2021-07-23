@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Product</strong></h5>
+            </div>
+
+
+            <div th:insert="fragments::info-modal"></div>
+
+            <!--Card content-->
+            <div class="card-body">
+                
+                <form th:action="@{/products/add}" th:object="${product}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name"><strong>Product Name</strong></label>
+                            <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="price"><strong>Price</strong></label>
+                            <input type="text" th:field="*{price}" th:class="${#fields.hasErrors('price')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="qty"><strong>Qty</strong></label>
+                            <input type="text" th:field="*{qty}" th:class="${#fields.hasErrors('qty')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('qty')}" th:errors="*{qty}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="description"><strong>Description</strong></label>
+                            <input type="text" th:field="*{description}" th:class="${#fields.hasErrors('description')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="categoryId"><strong>Category</strong></label>
+                            <select th:field="*{categoryId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="category : ${product.categories}"
+                                    th:value="${category.id}" 
+                                    th:text="${category.name}">category</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierId"><strong>Supplier</strong></label>
+                            <select th:field="*{supplierId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="supplier : ${product.suppliers}"
+                                    th:value="${supplier.id}" 
+                                    th:text="${supplier.companyName}">supplier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="storeId"><strong>Store</strong></label>
+                            <select th:field="*{storeId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="store : ${product.stores}"
+                                    th:value="${store.id}" 
+                                    th:text="${store.name}">name</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="availability"><strong>Availability</strong></label>
+                            <select th:field="*{availability}" class="browser-default custom-select" >
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" type="submit">Create</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+                
+

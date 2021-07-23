@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Store</strong></h5>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+                
+                <form th:action="@{/stores/add}" th:object="${store}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name"><strong>Store Name</strong></label>
+                            <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="address"><strong>Address</strong></label>
+                            <input type="text" th:field="*{address}" th:class="${#fields.hasErrors('address')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city"><strong>City</strong></label>
+                            <input type="text" th:field="*{city}" th:class="${#fields.hasErrors('city')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="status"><strong>Status</strong></label>
+                            <select th:field="*{status}" class="browser-default custom-select" >
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" type="submit">Create</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+                
+

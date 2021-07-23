@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Dashboard</title>
+    <div layout:fragment="content">
+
+
+
+
+
+
+
+
+
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-9 mb-4">
+
+
+                <!--Card-->
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <!-- Grid row -->
+                        <div class="row align-items-center">
+
+                            <!-- Grid column -->
+                            <div class="col-auto">
+                                <h5 class="heading"><strong>Total Parking</strong></h5>
+                            </div>
+
+                            <!-- Grid column -->
+                            <div class="col-auto">
+                                <select id="store" name="store" class="browser-default custom-select" >
+                                    <option>2020</option>
+                                    <option>2019</option>
+                                    <option>2018</option>
+                                    <option>2017</option>
+                                    <option>2016</option>
+                                    <option>2015</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <!-- Grid row -->
+
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <canvas id="myChart"></canvas>
+
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-3 mb-4">
+
+                <!--Card-->
+                <div class="card mb-4">
+
+                    <div class="card-header">
+                        <h5 class="heading"><strong>Summary</strong></h5>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!-- List group links -->
+                        <div class="list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action waves-effect">Total Products
+                                <span class="badge badge-success badge-pill pull-right">22%
+                                    <i class="fas fa-arrow-up ml-1"></i>
+                                </span>
+                            </a>
+                            <a class="list-group-item list-group-item-action waves-effect">Total Paid Orders
+                                <span class="badge badge-danger badge-pill pull-right">5%
+                                    <i class="fas fa-arrow-down ml-1"></i>
+                                </span>
+                            </a>
+                            <a class="list-group-item list-group-item-action waves-effect">Total Orders
+                                <span class="badge badge-primary badge-pill pull-right">14</span>
+                            </a>
+                            <a class="list-group-item list-group-item-action waves-effect">Total Employees
+                                <span class="badge badge-primary badge-pill pull-right">123</span>
+                            </a>
+                            <a class="list-group-item list-group-item-action waves-effect">Total Stores
+                                <span class="badge badge-primary badge-pill pull-right">123</span>
+                            </a>
+                            <a class="list-group-item list-group-item-action waves-effect">Messages
+                                <span class="badge badge-primary badge-pill pull-right">8</span>
+                            </a>
+                        </div>
+                        <!-- List group links -->
+
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+            <!--Grid column-->
+            <div class="col-md-9 mb-4">
+
+                <!--Card-->
+                <div class="card">
+
+                    <div class="card-header">
+                        <h5 class="heading"><strong>Total Paid Orders</strong></h5>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+
+                        <!-- Table  -->
+                        <table class="table table-hover">
+                            <!-- Table head -->
+                            <thead class="blue lighten-4">
+                                <tr>
+                                    <th><strong>Month - Year</strong></th>
+                                    <th><strong>Amount</strong></th>
+                                </tr>
+                            </thead>
+                            <!-- Table head -->
+
+                            <!-- Table body -->
+                            <tbody>
+                                <tr>
+                                    <th scope="row">2020-01</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-02</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-03</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-04</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-05</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-06</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-07</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-08</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-09</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-10</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-11</th>
+                                    <td>$ 0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2020-12</th>
+                                    <td>$ 0</td>
+                                </tr>
+                            </tbody>
+                            <!-- Table body -->
+                            <thead class="blue lighten-4">
+                                <tr>
+                                    <th><strong>Total Amount</strong></th>
+                                    <th><strong>$ 0</strong></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <!-- Table  -->
+
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+    </div>
+</html>

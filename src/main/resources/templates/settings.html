@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <!--Card header-->
+            <div class="card-header">
+                <h5 class="heading"><strong>Settings</strong></h5>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <a th:href="@{/settings/update}" class="btn btn-primary mr-auto mb-4">
+                    <i class="fas fa-edit mr-2"></i>Update Settings
+                </a>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Company Name :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.companyName}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Phone Number :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.phoneNumber}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Email :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.email}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Address :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.address}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Country :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.country}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col col-md-3 d-flex justify-content-end"><strong>Vat Charge (%) :</strong></div>
+                        <div class="col col-md-9" th:text="${settings.vatCharge}"></div>
+                    </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+
+
+

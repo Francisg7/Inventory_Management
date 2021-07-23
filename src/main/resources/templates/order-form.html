@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">New Order</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Order</strong></h5>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <form id="order-form">
+                    <div class="form-row">
+                        <div class="col-md-2">
+                            <label for="customerName" class="mt-1"><strong>Customer Name</strong></label>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <input type="text" id="customerName" name="customerName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-2">
+                            <label for="customerAddress" class="mt-1"><strong>Customer Address</strong></label>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <input type="text" id="customerAddress" name="customerAddress" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-2">
+                            <label for="customerPhone" class="mt-1"><strong>Customer Phone</strong></label>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <input type="text" id="customerPhone" name="customerPhone" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-md-12">
+
+                            <table class="table table-bordered" id="items-table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Product</strong></th>
+                                        <th style="width: 120px;"><strong>Qty</strong></th>
+                                        <th style="width: 120px;"><strong>Price</strong></th>
+                                        <th style="width: 200px;"><strong>Amount ($)</strong></th>
+                                        <th style="width: 80px;"><strong>Remove</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Generated Items -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-sm btn-light-green add-item" type="button"><i class="fas fa-plus mr-2"></i>Add Product</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <span class="mt-1 mr-4"><strong>Gross Amount ($)</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="grossAmount" name="grossAmount" class="form-control" value="0" disabled />
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <span class="mt-1 mr-4"><strong th:text="${'Vat (' + vat + '%)'}"></strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="vat" class="form-control" value="0" disabled />
+                            <input type="hidden" th:value="${vat}" id="vatValue"/>
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <span class="mt-1 mr-4"><strong>Discount (%)</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="discount" name="discount" class="form-control" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <span class="mt-1 mr-4"><strong>Net Amount ($)</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="netAmount" name="netAmount" class="form-control" value="0" disabled />
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" type="button" id="create-order">Create Order</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+
+

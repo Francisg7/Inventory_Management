@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorator="layout">
+
+    <title layout:fragment="title">Store</title>
+    <div layout:fragment="content">
+
+        <div class="card mb-4 wow fadeIn">
+
+            <div class="card-header">
+                <h5 class="heading"><strong>New Login</strong></h5>
+            </div>
+
+
+            <div th:insert="fragments::info-modal"></div>
+
+            <!--Card content-->
+            <div class="card-body">
+                
+                <form th:action="@{/logins/add}" th:object="${login}" method="post">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="employeeId"><strong>Employee</strong></label>
+                            <select th:field="*{employeeId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="employee : ${login.employees}"
+                                    th:value="${employee.id}" 
+                                    th:text="${employee.firstName + ' ' + employee.lastName}">employee
+                                </option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username"><strong>Username</strong></label>
+                            <input type="text" th:field="*{username}" th:class="${#fields.hasErrors('username')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="password"><strong>Password</strong></label>
+                            <input type="password" th:field="*{password}" th:class="${#fields.hasErrors('password')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="confirmPassword"><strong>Confirm Password</strong></label>
+                            <input type="password" th:field="*{confirmPassword}" th:class="${#fields.hasErrors('confirmPassword')}? 'form-control is-invalid' : 'form-control'" />
+                            <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="groupId"><strong>Group</strong></label>
+                            <select th:field="*{groupId}" class="browser-default custom-select" >
+                                <option 
+                                    th:each="group : ${login.groups}"
+                                    th:value="${group.id}" 
+                                    th:text="${group.name}">group
+                                </option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('groupId')}" th:errors="*{groupId}" class="invalid-feedback">
+                                errors
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" type="submit">Create</button>
+                    <button class="btn btn-grey" type="reset">Reset</button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</html> 
+                
+

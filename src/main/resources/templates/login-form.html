@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sybre - Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" th:href="@{/img/spring-boot.ico}" type="image/x-icon">
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.15.1/css/all.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/mdb.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- Material form login -->
+            <div class="card mx-auto login-form">
+
+                <h5 class="card-header default-color-dark white-text text-center py-4">
+                    <strong>Sign in</strong>
+                </h5>
+
+                <!--Card content-->
+                <div class="card-body px-lg-5 pt-0">
+
+                    <div class="alert alert-danger mt-4" th:if="${param.error}">
+                        <i class="fas fa-times"></i> Invalid username or password.
+                    </div>
+
+                    <div class="alert alert-success mt-4" th:if="${param.logout}">
+                        <i class="fas fa-check"></i> You've been logged out.
+                    </div>
+
+                    <!-- Form -->
+                    <form class="text-center" style="color: #757575;" th:action="@{/login}" method="post">
+
+                        <!-- Username -->
+                        <div class="md-form">
+                            <input type="text" id="username" name="username" class="form-control">
+                            <label for="username">Username</label>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="md-form">
+                            <input type="password" id="password" name="password" class="form-control">
+                            <label for="password">Password</label>
+                        </div>
+
+                        <!-- Remember me -->
+                        <!--
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
+                        </div>
+                        -->
+
+                        <!-- Sign in button -->
+                        <button class="btn btn-outline-pink btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+                    </form>
+                    <!-- Form -->
+
+                </div>
+
+            </div>
+            <!-- Material form login -->
+
+        </div>
+
+        <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+    </body>
+</html>
