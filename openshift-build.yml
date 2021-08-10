@@ -5,8 +5,8 @@ items:
     kind: BuildConfig
     metadata:
       labels:
-        app.kubernetes.io/name: sabre
-      name: sabre
+        app.kubernetes.io/name: iventory
+      name: inventory
     spec:
       output:
         to:
