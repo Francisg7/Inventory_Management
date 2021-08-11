@@ -43,7 +43,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags:  franciswilliams/invventory:latest
+          tags: franciswilliams/invventory:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
