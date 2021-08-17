@@ -23,7 +23,7 @@ pipeline {
   // After Pipeline completes the Pod is killed so every run will have clean
   // workspace
   agent {
-    label 'maven'
+    dockerfile true
   }
 
   // Pipeline Stages start here
@@ -44,36 +44,36 @@ pipeline {
     // Run Maven build, skipping tests
     stage('Build'){
       steps {
-        sh "mvn clean install"
+        sh "mvn -B"
       }
     }
 
-    // Run Maven unit tests
-    stage('Unit Test'){
-      steps {
-        sh "mvn -B test -f ${POM_FILE}"
-      }
-    }
+//     // Run Maven unit tests
+//     stage('Unit Test'){
+//       steps {
+//         sh "mvn -B test -f ${POM_FILE}"
+//       }
+//     }
 
-    // Build Container Image using the artifacts produced in previous stages
-    stage('Build Container Image'){
-      steps {
-        // Copy the resulting artifacts into common directory
-        sh """
-          ls target/*
-          rm -rf oc-build && mkdir -p oc-build/deployments
-          for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-            cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-          done
-        """
+//     // Build Container Image using the artifacts produced in previous stages
+//     stage('Build Container Image'){
+//       steps {
+//         // Copy the resulting artifacts into common directory
+//         sh """
+//           ls target/*
+//           rm -rf oc-build && mkdir -p oc-build/deployments
+//           for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
+//             cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
+//           done
+//         """
 
-        // Build container image using local Openshift cluster
-        // Giving all the artifacts to OpenShift Binary Build
-        // This places your artifacts into right location inside your S2I image
-        // if the S2I image supports it.
-        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
-      }
-    }
+//         // Build container image using local Openshift cluster
+//         // Giving all the artifacts to OpenShift Binary Build
+//         // This places your artifacts into right location inside your S2I image
+//         // if the S2I image supports it.
+//         binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
+//       }
+//     }
 
     stage('Promote from Build to Dev') {
       steps {
