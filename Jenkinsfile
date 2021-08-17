@@ -14,6 +14,17 @@ retriever: modernSCM(
 appName = "inventory-application"
 
 pipeline {
+  stages{
+        stage("initialize"){
+            steps{
+               sh '''
+                   echo "PATH = ${PATH}"
+                   echo "M2_HOME = ${M2_HOME}"
+                   '''
+
+            }
+        }
+    }
     // Use the 'maven' Jenkins agent image which is provided with OpenShift
     agent { label "maven" }
     stages {
@@ -24,10 +35,7 @@ pipeline {
         }
         stage("Docker Build") {
             steps {
-                // This uploads your application's source code and performs a binary build in OpenShift
-                // This is a step defined in the shared library (see the top for the URL)
-                // (Or you could invoke this step using 'oc' commands!)
-                binaryBuild(buildConfigName: appName, buildFromPath: ".")
+                sh 'docker-compose up'
             }
         }
 
