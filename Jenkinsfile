@@ -14,7 +14,9 @@ retriever: modernSCM(
 appName = "inventory-application"
 
 pipeline {
-  stages{
+    // Use the 'maven' Jenkins agent image which is provided with OpenShift
+    agent { label "maven" }
+    stages {
         stage("initialize"){
             steps{
                sh '''
@@ -24,10 +26,6 @@ pipeline {
 
             }
         }
-    }
-    // Use the 'maven' Jenkins agent image which is provided with OpenShift
-    agent { label "maven" }
-    stages {
         stage("Checkout") {
             steps {
                 checkout scm
