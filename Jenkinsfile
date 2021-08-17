@@ -6,15 +6,15 @@ retriever: modernSCM(
   ]
 )
 
-// openshift.withCluster() {
-//   env.NAMESPACE = openshift.project()
-//   env.POM_FILE = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
-//   echo "Starting Pipeline for ${env.APP_NAME}..."
-//   env.BUILD = "${env.NAMESPACE_BUILD}"
-//   env.DEV = "${env.NAMESPACE_DEV}"
-//   env.STAGE = "${env.NAMESPACE_STAGE}"
-//   env.PROD = "${env.NAMESPACE_PROD}"
-// }
+openshift.withCluster() {
+  env.NAMESPACE = openshift.project()
+  env.POM_FILE = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
+  echo "Starting Pipeline for ${env.APP_NAME}..."
+  env.BUILD = "${env.NAMESPACE_BUILD}"
+  env.DEV = "${env.NAMESPACE_DEV}"
+  env.STAGE = "${env.NAMESPACE_STAGE}"
+  env.PROD = "${env.NAMESPACE_PROD}"
+}
 
 pipeline {
   // Use Jenkins Maven slave
