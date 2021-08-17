@@ -23,7 +23,7 @@ pipeline {
   // After Pipeline completes the Pod is killed so every run will have clean
   // workspace
   agent {
-    dockerfile true
+    label 'maven' 
   }
 
   // Pipeline Stages start here
@@ -41,12 +41,19 @@ pipeline {
       }
     }
 
-//     // Run Maven build, skipping tests
-//     stage('Build'){
-//       steps {
-//         sh "mvn -B"
-//       }
-//     }
+    // Run Maven build, skipping tests
+    stage("Build") {
+        agent {
+           dockerfile {
+           filename 'dockerfile'  
+           label 'maven'
+           args "-v /home/user/maven:/var/maven" 
+       }
+    }   
+    steps {
+        sh "mvn clean install"
+    }
+}
 
 //     // Run Maven unit tests
 //     stage('Unit Test'){
