@@ -5,14 +5,14 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 ARG GIT_COMMIT=unspecified
 LABEL git_commit=$GIT_COMMIT
 # Run this command to find git commit:-
-#docker inspect quay.io/shazchaudhry/docker-jenkins | jq '.[].ContainerConfig.Labels'
+docker inspect quay.io/shazchaudhry/docker-jenkins | jq '.[].ContainerConfig.Labels'
 
 # Configure Jenkins
 COPY config/*.xml $JENKINS_HOME/
 COPY config/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # Once jenkins is running and configured, run the following command to find the list of plugins installed:
-##  curl -s -k "http://admin:admin@localhost:8080/pluginManager/api/json?depth=1" | jq -r '.plugins[].shortName' | tee plugins.txt
+curl -s -k "http://admin:admin@localhost:8080/pluginManager/api/json?depth=1" | jq -r '.plugins[].shortName' | tee plugins.txt
 RUN /usr/local/bin/install-plugins.sh \
   ace-editor \
   ant \
@@ -130,13 +130,15 @@ RUN apt-get update -qq && \
 USER jenkins
 
 VOLUME [$JENKINS_HOME, "/var/run/docker.sock"]
+
+
+
+
+
+
 #### Stage 1: Build the application
 FROM openjdk:8-jdk-alpine as build
 ARG JAR_FILE=target/*.jar
-RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
-  && tar xzvf docker-17.04.0-ce.tgz \
-  && mv docker/docker /usr/local/bin \
-  && rm -r docker docker-17.04.0-ce.tgz
 # Copy project dependencies from the build stage
 COPY ${JAR_FILE} sabre-0.0.1-SNAPSHOT.jar
 EXPOSE 8086
