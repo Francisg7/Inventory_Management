@@ -14,7 +14,7 @@ retriever: modernSCM(
 //   env.DEV = "${env.NAMESPACE_DEV}"
 //   env.STAGE = "${env.NAMESPACE_STAGE}"
 //   env.PROD = "${env.NAMESPACE_PROD}"
-}
+// }
 
 pipeline {
   // Use Jenkins Maven slave
