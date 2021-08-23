@@ -1,16 +1,10 @@
 
 #### Stage 1: Build the application
 FROM openjdk:8-jdk-alpine as build
-COPY assets/settings.xml /tmp/settings.xml
-ENV PATH=$PATH:/opt/maven/bin
 
-RUN apk add --no-cache curl tar bash && \
-  curl -SsL -o /tmp/maven.tar.gz http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
-  mkdir -p /opt && \
-  tar xzf /tmp/maven.tar.gz -C /opt/ && \
-  ln -s /opt/apache-maven-3.3.9 /opt/maven && \
-  rm /tmp/maven.tar.gz && \
-  mv /tmp/settings.xml /opt/maven/conf/settings.xml
+M2_HOME = C:\Users\FRANCIS WILLIAMS\Desktop\PERFITCOM\apache-maven-3.8.1\bin\ 
+M2 = C:\Users\FRANCIS WILLIAMS\Desktop\PERFITCOM\apache-maven-3.8.1\
+SET PATH=%M2_HOME%
   
 RUN mvn clean install
 RUN mvn package
