@@ -1,10 +1,26 @@
 
 #### Stage 1: Build the application
 FROM openjdk:8-jdk-alpine as build
+RUN apk add --no-cache curl tar bash
 
-M2_HOME = C:\Users\FRANCIS WILLIAMS\Desktop\PERFITCOM\apache-maven-3.8.1\bin\ 
-M2 = C:\Users\FRANCIS WILLIAMS\Desktop\PERFITCOM\apache-maven-3.8.1\
-SET PATH=%M2_HOME%
+ARG MAVEN_VERSION=3.3.9
+ARG USER_HOME_DIR="/root"
+
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+  && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
+    | tar -xzC /usr/share/maven --strip-components=1 \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+
+COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
+COPY settings-docker.xml /usr/share/maven/ref/
+
+VOLUME "$USER_HOME_DIR/.m2"
+
+ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
+CMD ["mvn"]
   
 RUN mvn clean install
 RUN mvn package
