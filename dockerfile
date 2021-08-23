@@ -1,6 +1,6 @@
 
 #### Stage 1: Build the application
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk
 RUN apk add --no-cache curl tar bash
 
 ARG MAVEN_VERSION=3.3.9
@@ -21,7 +21,8 @@ VOLUME "$USER_HOME_DIR/.m2"
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
-  
+
+FROM openjdk:8-jdk-alpine  
 RUN mvn clean install
 RUN mvn package
 ARG JAR_FILE=target/*.jar
