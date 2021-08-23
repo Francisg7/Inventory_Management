@@ -1,6 +1,6 @@
 
 #### Stage 1: Build the application
-FROM openjdk:8-jdk-alpine as build
+FROM openjdk:8-jdk-alpine
 RUN apk add --no-cache curl tar bash
 
 ARG MAVEN_VERSION=3.3.9
