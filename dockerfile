@@ -21,8 +21,7 @@ VOLUME "$USER_HOME_DIR/.m2"
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
-
-FROM openjdk:8-jdk-alpine  
+ 
 RUN mvn clean install
 RUN mvn package
 ARG JAR_FILE=target/*.jar
