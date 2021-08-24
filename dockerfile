@@ -22,7 +22,7 @@ VOLUME "$USER_HOME_DIR/.m2"
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
  
-RUN mvn clean install
+#RUN mvn clean install
 RUN mvn package
 ARG JAR_FILE=target/*.jar
 # Copy project dependencies from the build stage
