@@ -23,7 +23,7 @@ ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
  
 #RUN mvn clean install
-RUN mvn package
+#RUN mvn package
 ARG JAR_FILE=target/*.jar
 # Copy project dependencies from the build stage
 COPY ${JAR_FILE} sabre-0.0.1-SNAPSHOT.jar
