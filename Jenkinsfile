@@ -32,7 +32,7 @@ pipeline {
     // Jenkins Master but this will also pull this same code to this slave
     stage('Git Checkout') {
       steps {
-        sh "mkdir $(appFolder)"
+        sh "mkdir ${appFolder}"
         dir(appFolder){ 
           git url: "${appSourceUrl}", branch: "${appSourceRef}"
         }
