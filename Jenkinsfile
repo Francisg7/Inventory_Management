@@ -50,7 +50,7 @@ pipeline {
     stage('Build'){
       steps {
         dir(appFolder){
-          sh "mvn clean install -Djar.FileName=sabre-0.0.1-SNAPSHOT"
+          sh "mvn clean install "
         }
       }
     }
