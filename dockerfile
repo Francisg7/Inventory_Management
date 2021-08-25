@@ -22,13 +22,14 @@ VOLUME "$USER_HOME_DIR/.m2"
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 CMD ["mvn"]
  
-#RUN mvn clean install
-#RUN mvn package
-ARG JAR_FILE=target/*.jar
+RUN mvn clean install
+RUN mvn package
+RUN mvn build
+#ARG JAR_FILE=target/*.jar
 # Copy project dependencies from the build stage
-COPY ${JAR_FILE} sabre-0.0.1-SNAPSHOT.jar
+#COPY ${JAR_FILE} sabre-0.0.1-SNAPSHOT.jar
 EXPOSE 8086
-ENTRYPOINT ["java","-jar","/sabre-0.0.1-SNAPSHOT.jar"]
+#ENTRYPOINT ["java","-jar","/sabre-0.0.1-SNAPSHOT.jar"]
 #RUN addgroup -S spring && adduser -S spring -G spring
 
 
