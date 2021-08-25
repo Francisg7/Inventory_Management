@@ -54,7 +54,7 @@ pipeline {
     stage('Get version from POM'){
       steps {
         dir(appFolder){
-          tag =readMavenPom().getVersion()
+          tag=readMavenPom().getVersion()
         }
       }
     }
