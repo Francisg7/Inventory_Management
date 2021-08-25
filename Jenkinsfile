@@ -8,6 +8,8 @@ retriever: modernSCM(
 
 appSourceUrl = "https://github.com/Francisg7/Inventory_Management/"
 appSourceRef = "master"
+MYSQL_USERNAME = "root"
+MYSQL_PASSWORD = ""
 
 appFolder = "app"
 appName = "Inventory-management"
@@ -38,6 +40,12 @@ pipeline {
         }
       }
     }
+    stage('Mysql Connect') {
+      steps {
+        ssh remote_server "mysql --user='$MYSQL_USERNAME' --password='$MYSQL_PASSWORD' -e 'SHOW DATABASES;' 2>/dev/null"
+      }
+    }
+    
 
 //     stage('Get version from POM'){
 //       steps {
