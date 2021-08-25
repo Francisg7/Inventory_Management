@@ -39,13 +39,13 @@ pipeline {
       }
     }
 
-    stage('Get version from POM'){
-      steps {
-        dir(appFolder){
-          tag = readMavenPom().getVersion()
-        }
-      }
-    }
+//     stage('Get version from POM'){
+//       steps {
+//         dir(appFolder){
+//           tag = readMavenPom().getVersion()
+//         }
+//       }
+//     }
 
     stage('Build'){
       steps {
