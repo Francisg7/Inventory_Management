@@ -39,15 +39,6 @@ pipeline {
       }
     }
     
-
-    stage('Get version from POM'){
-      steps {
-        dir(appFolder){
-          tag = readMavenPom().getVersion()
-        }
-      }
-    }
- 
     stage('Build') {
         agent {
             docker {
@@ -59,6 +50,15 @@ pipeline {
             sh 'mvn --version'
         }
     }
+
+    stage('Get version from POM'){
+      steps {
+        dir(appFolder){
+          tag = readMavenPom().getVersion()
+        }
+      }
+    }
+
     
 
     // Build Container Image using the artifacts produced in previous stages
