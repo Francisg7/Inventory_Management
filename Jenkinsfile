@@ -11,7 +11,7 @@ appSourceRef = "master"
 
 appFolder = "app"
 appName = "Inventory-management"
-}
+
 
 pipeline {
   // Use Jenkins Maven slave
