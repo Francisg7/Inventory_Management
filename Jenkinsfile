@@ -38,26 +38,37 @@ pipeline {
         }
       }
     }
-    
-    stage('Build') {
-        agent {
-            docker {
-                image 'franciswilliams/invventory:latest'
-                // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely
-            }
-        }
-        steps {
-            sh 'mvn --version'
-        }
-    }
+ 
 
     stage('Get version from POM'){
       steps {
         dir(appFolder){
-          tag=readMavenPom().getVersion()
+          tag =readMavenPom().getVersion()
         }
       }
     }
+    
+    stage('Build') {
+       steps {
+        dir(appFolder){
+          sh "mvn clean install -Djar.finalName=sabre-0.0.1-SNAPSHOT"
+        }
+      } 
+     }
+    
+    
+    
+//      stage('Build') {
+//         agent {
+//             docker {
+//                 image 'franciswilliams/invventory:latest'
+//                 // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely
+//             }
+//         }
+//         steps {
+//             sh 'mvn --version'
+//         }
+//     }
 
     
 
