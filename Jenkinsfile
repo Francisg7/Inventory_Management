@@ -62,11 +62,9 @@ pipeline {
 //                 image 'franciswilliams/invventory:lts'
 //                 // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely
 //             }
-        steps {
           def dockerName = tool name: '', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
             sh "${dockerName} compose up"
             sh 'mvn --version'
-        }
     }
 
     
