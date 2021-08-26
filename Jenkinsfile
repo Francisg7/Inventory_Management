@@ -48,7 +48,7 @@ pipeline {
     // Run Maven build, skipping tests
     stage('Build'){
       steps {
-        sh "mvn package"
+        sh "mvn -B clean install -DskipTests=true -f ${POM_FILE}"
       }
     }
 
