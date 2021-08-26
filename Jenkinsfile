@@ -6,12 +6,18 @@ retriever: modernSCM(
   ]
 )
 
-appSourceUrl = "https://github.com/Francisg7/Inventory_Management/"
-appSourceRef = "master"
+openshift.withCluster() {
+  env.NAMESPACE = openshift.project()
+  env.POM_FILE = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
+  echo "Starting Pipeline for ${env.APP_NAME}..."
+  env.BUILD = "${env.NAMESPACE_BUILD}"
+  env.DEV = "${env.NAMESPACE_DEV}"
+  env.STAGE = "${env.NAMESPACE_STAGE}"
+  env.PROD = "${env.NAMESPACE_PROD}"
+}
 
-appFolder = "app"
-appName = "Inventory-management"
-dockerName = tool name: '', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+APPLICATION_SOURCE_REPO = "https://github.com/Francisg7/Inventory_Management"
+APPLICATION_SOURCE_REF = "master"
 
 
 pipeline {
@@ -33,97 +39,88 @@ pipeline {
     // Jenkins Master but this will also pull this same code to this slave
     stage('Git Checkout') {
       steps {
-        sh "mkdir ${appFolder}"
-        dir(appFolder){ 
-          git url: "${appSourceUrl}", branch: "${appSourceRef}"
-        }
+        // Turn off Git's SSL cert check, uncomment if needed
+        // sh 'git config --global http.sslVerify false'
+        git url: "${APPLICATION_SOURCE_REPO}", branch: "${APPLICATION_SOURCE_REF}"
       }
     }
 
-    stage('Get version from POM'){
+    // Run Maven build, skipping tests
+    stage('Build'){
       steps {
-        dir(appFolder){
-          sh "mvn -version"
-        }
+        sh "mvn -B clean install -DskipTests=true -f ${POM_FILE}"
       }
     }
-    
-//     stage('Build') {
-//        steps {
-//         dir(appFolder){
-//           sh "mvn clean install -Djar.finalName=sabre-0.0.1-SNAPSHOT"
-//         }
-//       } 
-//      }
-    
-    
-     stage('Build') {
-       node('master'){
-//         agent {
-//             docker {
-//                 image 'franciswilliams/invventory:lts'
-//                 // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely
-//             }
-       
-         sh "${dockerName} compose up"
-         sh 'mvn --version'
-      
-      }   
-    }
 
-    
+    // Run Maven unit tests
+    stage('Unit Test'){
+      steps {
+        sh "mvn -B test -f ${POM_FILE}"
+      }
+    }
 
     // Build Container Image using the artifacts produced in previous stages
-    stage('Deploy Build'){
+    stage('Build Container Image'){
       steps {
-       dir(appFolder){
-           binaryBuild(buildConfigName:appName, buildFromPath:".")
+        // Copy the resulting artifacts into common directory
+        sh """
+          ls target/*
+          rm -rf oc-build && mkdir -p oc-build/deployments
+          for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
+            cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
+          done
+        """
+
+        // Build container image using local Openshift cluster
+        // Giving all the artifacts to OpenShift Binary Build
+        // This places your artifacts into right location inside your S2I image
+        // if the S2I image supports it.
+        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
+      }
+    }
+
+    stage('Promote from Build to Dev') {
+      steps {
+        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV)
+      }
+    }
+
+    stage ('Verify Deployment to Dev') {
+      steps {
+        verifyDeployment(projectName: env.DEV, targetApp: env.APP_NAME)
+      }
+    }
+
+    stage('Promote from Dev to Stage') {
+      steps {
+        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.DEV, toImagePath: env.STAGE)
+      }
+    }
+
+    stage ('Verify Deployment to Stage') {
+      steps {
+        verifyDeployment(projectName: env.STAGE, targetApp: env.APP_NAME)
+      }
+    }
+
+    stage('Promotion gate') {
+      steps {
+        script {
+          input message: 'Promote application to Production?'
         }
       }
     }
 
-//     stage('Promote from Build to Dev') {
-//       steps {
-//         tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.BUILD, toImagePath: env.DEV)
-//       }
-//     }
+    stage('Promote from Stage to Prod') {
+      steps {
+        tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.STAGE, toImagePath: env.PROD)
+      }
+    }
 
-//     stage ('Verify Deployment to Dev') {
-//       steps {
-//         verifyDeployment(projectName: env.DEV, targetApp: env.APP_NAME)
-//       }
-//     }
-
-//     stage('Promote from Dev to Stage') {
-//       steps {
-//         tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.DEV, toImagePath: env.STAGE)
-//       }
-//     }
-
-//     stage ('Verify Deployment to Stage') {
-//       steps {
-//         verifyDeployment(projectName: env.STAGE, targetApp: env.APP_NAME)
-//       }
-//     }
-
-//     stage('Promotion gate') {
-//       steps {
-//         script {
-//           input message: 'Promote application to Production?'
-//         }
-//       }
-//     }
-
-//     stage('Promote from Stage to Prod') {
-//       steps {
-//         tagImage(sourceImageName: env.APP_NAME, sourceImagePath: env.STAGE, toImagePath: env.PROD)
-//       }
-//     }
-
-//     stage ('Verify Deployment to Prod') {
-//       steps {
-//         verifyDeployment(projectName: env.PROD, targetApp: env.APP_NAME)
-//       }
-//     }
+    stage ('Verify Deployment to Prod') {
+      steps {
+        verifyDeployment(projectName: env.PROD, targetApp: env.APP_NAME)
+      }
+    }
   }
 }
