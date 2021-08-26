@@ -1,3 +1,8 @@
+FROM maven:3.8-openjdk-11 as build
+WORKDIR /app
+COPY . .
+RUN mvn install
+
 
 #### Stage 1: Build the application
 FROM openjdk:8-jdk-alpine
@@ -24,7 +29,7 @@ CMD ["mvn"]
  
 RUN mvn clean install
 RUN mvn package
-RUN mvn build
+#RUN mvn build
 #ARG JAR_FILE=target/*.jar
 # Copy project dependencies from the build stage
 #COPY ${JAR_FILE} sabre-0.0.1-SNAPSHOT.jar
