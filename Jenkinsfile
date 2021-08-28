@@ -78,6 +78,15 @@ pipeline {
         binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, buildFromPath: "oc-build")
       }
     }
+    
+    stage('Analyse code') {
+      steps {
+        mvn sonar:sonar \
+          -Dsonar.projectKey=inventory-management \
+          -Dsonar.host.url=https://sonarqube-franciswilliam-dev.apps.sandbox.x8i5.p1.openshiftapps.com \
+          -Dsonar.login=eef9cc75ccc0f8c9a9b12e4d4f20a560415b1dba
+      }
+    }
 
     stage('Promote from Build to Dev') {
       steps {
