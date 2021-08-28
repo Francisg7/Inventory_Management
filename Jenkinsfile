@@ -16,7 +16,7 @@ openshift.withCluster() {
   env.PROD = "${env.NAMESPACE_PROD}"
 }
 
-APPLICATION_SOURCE_REPO = "http://gogs-franciswilliam-dev.apps.sandbox.x8i5.p1.openshiftapps.com/Francisg7/Inventory-app.git"
+APPLICATION_SOURCE_REPO = "https://github.com/Francisg7/Inventory_Management/"
 APPLICATION_SOURCE_REF = "master"
 
 
